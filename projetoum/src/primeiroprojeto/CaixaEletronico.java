@@ -35,13 +35,39 @@ public class CaixaEletronico {
             System.out.println("1-Depositar dinheiro\n2-Ver saldo dispovível\n3-Ver empréstimo disponível\n4-Solicitar emprestimo\n5-Sacar dinheiro\n6-Sair");
             int opcao = in.nextInt();
 
-            while(opcao < 1 || opcao > 6){
-                System.out.println("As opções vão do 1 ao 6.");
-                System.out.println("Escolha novamente: ");
-                System.out.println("1-Depositar dinheiro\n2-Ver saldo dispovível\n3-Ver empréstimo disponível\n4-Solicitar emprestimo\n5-Sacar dinheiro\n6-Sair");
-                opcao = in.nextInt();
-            } 
-                
+            if(opcao < 1 || opcao > 6){
+                MetodosDeFluxo validando = new MetodosDeFluxo();
+                validando.validarObjetivo(opcao);
+                //validando opção de fluxo, até a opção estar no intervalo de 1 a 6.
+            }
+
+            switch (opcao) {
+                case 1:
+                    System.out.println("Digite o valor que deseja depositar: ");
+                    saldo = in.nextDouble();
+                    System.out.println("Valor depositado com sucesso!");
+                    System.out.printf("seu saldo atual é de: R$%.2f",saldo);
+                        break;
+                case 2:
+                    System.out.printf("seu saldo atual é de: R$%.2f", saldo);
+                        break;
+                case 3:
+                    System.out.println("O valor de empréstimo disponível é: R$" + emprestimoDisponivel);
+                        break;
+                case 4:
+                    System.out.println("Quanto você deseja sacar?");
+                    break;
+                case 5:
+                    System.out.println("Quanto você deseja sacar");
+                    break;
+                case 6:
+                    System.out.println("Até logo!");
+                    break;                    
+            
+                default:
+                    break;
+            }
+
         }  else {
             System.out.println("fim da aplicação.");
         }
