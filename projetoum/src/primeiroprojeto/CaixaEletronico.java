@@ -1,6 +1,7 @@
 import java.util.Locale;
 import java.util.Scanner;
 
+
 public class CaixaEletronico {
     public static void main(String[] args) throws Exception {
 
@@ -8,6 +9,9 @@ public class CaixaEletronico {
         String cadastrar = "SIM";
         double emprestimoDisponivel = 1500;
         double saldo = 0;
+        double saldoAtual = 0;
+        double valorSaqueCredito = 0;
+        double valorSaque = 0; 
         
         Scanner in = new Scanner(System.in).useLocale(Locale.US);
         //entrada de dados
@@ -41,32 +45,83 @@ public class CaixaEletronico {
                 //validando opção de fluxo, até a opção estar no intervalo de 1 a 6.
             }
 
-            switch (opcao) {
-                case 1:
-                    System.out.println("Digite o valor que deseja depositar: ");
-                    saldo = in.nextDouble();
-                    System.out.println("Valor depositado com sucesso!");
-                    System.out.printf("seu saldo atual é de: R$%.2f",saldo);
+
+            do{
+                switch (opcao) {
+                    case 1:
+                        System.out.println("Digite o valor que deseja depositar: ");
+                        saldo = in.nextDouble();
+                        saldoAtual = saldoAtual + saldo;
+                        System.out.println("Valor depositado com sucesso!");
+                        System.out.printf("seu saldo atual é de: R$%.2f",saldoAtual);
+                        System.out.println("\nRealizar outra operaçõa ou sair?\nDigite apenas o número:");
+                        opcao = in.nextInt();
+                            break;
+                            //depositando dinheiro
+                    case 2:
+                        System.out.printf("seu saldo atual é de: R$%.2f", saldoAtual);
+                        System.out.println("\nRealizar outra operaçõa ou sair?\nDigite apenas o número:");
+                        opcao = in.nextInt();
+                            break;
+                            //expondo saldo
+                            // ñ precisa de metodo
+                    case 3:
+                        System.out.printf("O valor de empréstimo disponível é: R$%.2f", emprestimoDisponivel);
+                        System.out.println("\nRealizar outra operaçõa ou sair?\nDigite apenas o número:");
+                        opcao = in.nextInt();
+                            break;
+                            //expondo empréstimo disponível
+                            //ñ precisa de metodo
+                    case 4:
+                        MetodosDeFluxo funcao = new MetodosDeFluxo();
+
+                        System.out.println("Valor de empresto?");
+                        valorSaqueCredito = in.nextDouble();
+                        
+                        funcao.subtraindoCredito(emprestimoDisponivel,valorSaqueCredito);
+                        emprestimoDisponivel = funcao.subtraindoCredito(emprestimoDisponivel,valorSaqueCredito);
+
+                        System.out.printf("Emprestimo efetuado com sucesso!");
+                        System.out.printf("Você sacou R$" + valorSaqueCredito +"\nCrédito disponível: %.2f",emprestimoDisponivel);
+
+                        
+
+                        System.out.println("\nRealizar outra operaçõa ou sair?\nDigite apenas o número:");
+                        opcao = in.nextInt();
                         break;
-                case 2:
-                    System.out.printf("seu saldo atual é de: R$%.2f", saldo);
+                        //solicitando emprestimo
+                        //metodo de subtração
+                        //mudar nome do objeto
+                    case 5:
+                    //chamar metodo
+                    MetodosDeFluxo sacando = new MetodosDeFluxo();
+
+                        System.out.println("Quanto você deseja sacar");
+                        valorSaque = in.nextDouble();
+
+                        sacando.diminuindoSaldo(saldoAtual, valorSaque);
+                        saldoAtual = sacando.diminuindoSaldo(saldoAtual, valorSaque);
+
+                        System.out.println("Saque efetuado com sucesso!");
+                        System.out.printf("\nSaldo restante disponivel:%.2f", saldoAtual);
+
+                        System.out.println("\nRealizar outra operaçõa ou sair?\nDigite apenas o número:");
+                        opcao = in.nextInt();
                         break;
-                case 3:
-                    System.out.println("O valor de empréstimo disponível é: R$" + emprestimoDisponivel);
+                        //sacando dinheiro
+                        //metodo de subtração
+                    case 6:
+                        System.out.println("Até logo!");
+                        System.out.println("\nRealizar outra operaçõa ou sair?\nDigite apenas o número:");
+                        opcao = in.nextInt();
+                        break;                    
+                        //encerrando operação
+                    default:
                         break;
-                case 4:
-                    System.out.println("Quanto você deseja sacar?");
-                    break;
-                case 5:
-                    System.out.println("Quanto você deseja sacar");
-                    break;
-                case 6:
-                    System.out.println("Até logo!");
-                    break;                    
-            
-                default:
-                    break;
-            }
+                        //adicionar metodo de investimento, contendo três modalidades de investimento
+                }
+
+            }while(opcao >= 1 && opcao <= 5);
 
         }  else {
             System.out.println("fim da aplicação.");
@@ -90,4 +145,6 @@ public class CaixaEletronico {
  * investimento 0,8 % ao mês
  * parcelas a pagar após solicitar emprestimo
  * 
+ * em todos os cases, adicionar estruturas de "prevenção"
+ * adicionar confirmação de senha em todos os interesses
  */

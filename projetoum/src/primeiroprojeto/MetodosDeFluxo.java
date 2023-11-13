@@ -19,4 +19,19 @@ public class MetodosDeFluxo{
         return escolha;
         //método para validar opção que anteriormente foi digitado errado
     }
+
+    public double diminuindoSaldo(double valor1, double valor2){
+        double sacandoSaldo;
+        sacandoSaldo = valor1 - valor2; 
+        return sacandoSaldo;
+        //retornando diretamente a subtração  
+    }
+
+    public double subtraindoCredito(double val1, double val2){
+        double subtraido = val1 - val2;
+        return subtraido;
+        //retornando a subtração do crédito
+    }
+
+
 }
